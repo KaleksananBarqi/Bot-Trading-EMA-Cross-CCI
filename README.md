@@ -63,8 +63,8 @@ Ditentukan pada `config.yaml` > `strategy.entry_mode`:
 ### 2. Instalasi Environment
 ```bash
 # Clone repository
-git clone <url-repo>
-cd "BOT EMA CROSS+CCI"
+git clone https://github.com/KaleksananBarqi/Bot-Trading-EMA-Cross-CCI.git
+cd Bot-Trading-EMA-Cross-CCI
 
 # Buat virtual environment
 python -m venv .venv
@@ -84,8 +84,9 @@ pip install -e ".[dev]"
    ```env
    BINANCE_API_KEY=kunci_api_anda
    BINANCE_API_SECRET=rahasia_api_anda
-   TELEGRAM_BOT_TOKEN=token_bot_dari_botfather
+   TELEGRAM_TOKEN=token_bot_dari_botfather
    TELEGRAM_CHAT_ID=id_telegram_anda
+   TELEGRAM_MESSAGE_THREAD_ID=id_topik_grup_opsional
    MONGO_URI=mongodb://localhost:27017
    ```
 3. Buka `config.yaml` untuk menyesuaikan parameter strategi. Fitur penting:
