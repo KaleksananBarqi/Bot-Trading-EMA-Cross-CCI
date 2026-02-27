@@ -92,7 +92,7 @@ pip install -e ".[dev]"
 3. Buka `config.yaml` untuk menyesuaikan parameter strategi. Fitur penting:
    * `testnet: true` (Sangat disarankan memakai Testnet di awal)
    * `active_timeframes`: Tentukan TF mana bot harus aktif (misalnya `["15m", "1h"]`). TF `1m` diblokir oleh sistem untuk menghindari *noise*.
-   * `pairs`: Terapkan pada pair yang dituju (`BTC/USDT`, dll).
+   * `pairs`: Terapkan pada pair yang dituju (`symbol`), atur `leverage` (misal 20) dan `margin_mode` (isolated/crossed).
 
 ## Menjalankan Bot
 

@@ -32,9 +32,15 @@ risk:
   max_position_size_pct: 5.0    # Maks % balance per posisi
 
 pairs:
-  - "BTC/USDT"
-  - "ETH/USDT"
-  - "SOL/USDT"
+  - symbol: "BTC/USDT"
+    leverage: 20
+    margin_mode: "isolated"
+  - symbol: "ETH/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+  - symbol: "SOL/USDT"
+    leverage: 10
+    margin_mode: "isolated"
 
 telegram:
   enabled: true

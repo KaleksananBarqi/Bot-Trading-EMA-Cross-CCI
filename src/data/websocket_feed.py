@@ -71,7 +71,7 @@ class WebSocketFeed:
         """
         assert self.exchange is not None
 
-        for pair in self.config.pairs:
+        for pair in self.config.pair_symbols:
             for tf in self.config.strategy.active_timeframes:
                 try:
                     log.info(f"Fetching historical data — {pair} [{tf}]...")
@@ -95,7 +95,7 @@ class WebSocketFeed:
         """
         self._running = True
 
-        for pair in self.config.pairs:
+        for pair in self.config.pair_symbols:
             for tf in self.config.strategy.active_timeframes:
                 task = asyncio.create_task(
                     self._watch_kline(pair, tf),
@@ -106,7 +106,7 @@ class WebSocketFeed:
 
         log.info(
             f"WebSocket feed aktif — "
-            f"{len(self.config.pairs)} pairs × "
+            f"{len(self.config.pair_symbols)} pairs × "
             f"{len(self.config.strategy.active_timeframes)} timeframes = "
             f"{len(self._tasks)} streams"
         )

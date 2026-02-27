@@ -24,6 +24,13 @@ class ExchangeConfig(BaseModel):
     testnet: bool = True
 
 
+class PairConfig(BaseModel):
+    """Konfigurasi spesifik tiap pair."""
+    symbol: str = Field(..., description="Simbol pair, misal BTC/USDT")
+    leverage: int = Field(default=10, ge=1, le=125, description="Leverage untuk pair ini")
+    margin_mode: Literal["isolated", "crossed"] = Field(default="isolated", description="Mode margin")
+
+
 class StrategyConfig(BaseModel):
     """Parameter strategi EMA Cross + CCI."""
     ema_fast: int = Field(default=10, ge=1, description="Length EMA cepat")
@@ -115,7 +122,11 @@ class BotConfig(BaseModel):
     exchange: ExchangeConfig = ExchangeConfig()
     strategy: StrategyConfig = StrategyConfig()
     risk: RiskConfig = RiskConfig()
-    pairs: list[str] = Field(default=["BTC/USDT"])
+    pairs: list[PairConfig] = Field(
+        default_factory=lambda: [
+            PairConfig(symbol="BTC/USDT", leverage=10, margin_mode="isolated")
+        ]
+    )
     telegram: TelegramConfig = TelegramConfig()
     mongodb: MongoDBConfig = MongoDBConfig()
     logging: LoggingConfig = LoggingConfig()
@@ -127,6 +138,18 @@ class BotConfig(BaseModel):
     telegram_chat_id: str = ""
     telegram_message_thread_id: str | None = None
     mongo_uri: str = "mongodb://localhost:27017"
+
+    @property
+    def pair_symbols(self) -> list[str]:
+        """Helper property untuk mendapatkan daftar simbol pair."""
+        return [p.symbol for p in self.pairs]
+
+    def get_pair_config(self, symbol: str) -> PairConfig | None:
+        """Mendapatkan konfigurasi pair berdasarkan simbol."""
+        for p in self.pairs:
+            if p.symbol == symbol:
+                return p
+        return None
 
 
 # ──────────────────────────────────────────────
@@ -200,7 +223,7 @@ def load_config(config_path: str = "config.yaml", env_path: str = ".env") -> Bot
         f"Config tervalidasi — "
         f"exchange={config.exchange.name} "
         f"testnet={config.exchange.testnet} "
-        f"pairs={config.pairs} "
+        f"pairs={config.pair_symbols} "
         f"active_tf={config.strategy.active_timeframes} "
         f"entry_mode={config.strategy.entry_mode}"
     )

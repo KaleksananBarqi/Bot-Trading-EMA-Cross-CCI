@@ -108,19 +108,28 @@ class TradingBot:
 
             # ── 6. Kirim notif startup ──
             await self.notifier.notify_startup(
-                pairs=self.config.pairs,
+                pairs=self.config.pair_symbols,
                 timeframes=self.config.strategy.active_timeframes,
             )
 
             log.info(
                 f"Bot siap — "
-                f"Pairs: {self.config.pairs} | "
+                f"Pairs: {self.config.pair_symbols} | "
                 f"TF: {self.config.strategy.active_timeframes} | "
                 f"Entry: {self.config.strategy.entry_mode} | "
                 f"Testnet: {self.config.exchange.testnet}"
             )
 
-            # ── 7. Start streaming (blocking) ──
+            # ── 7. Set Margin & Leverage ──
+            for pair_cfg in self.config.pairs:
+                try:
+                    await self.order_manager.exchange.set_margin_mode(pair_cfg.margin_mode, pair_cfg.symbol)
+                    await self.order_manager.exchange.set_leverage(pair_cfg.leverage, pair_cfg.symbol)
+                    log.info(f"Berhasil setup {pair_cfg.symbol}: mode {pair_cfg.margin_mode}, leverage {pair_cfg.leverage}x")
+                except Exception as e:
+                    log.error(f"Gagal mengatur leverage/margin untuk {pair_cfg.symbol}: {e}")
+
+            # ── 8. Start streaming (blocking) ──
             await self.ws_feed.start()
 
         except asyncio.CancelledError:
