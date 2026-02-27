@@ -179,7 +179,8 @@ class TradingBot:
 
             # ── 4. Hitung risk parameters ──
             balance = await self._get_balance()
-            risk_params = self.risk_manager.calculate(signal, df, balance)
+            pair_config = self.config.get_pair_config(pair)
+            risk_params = self.risk_manager.calculate(signal, df, balance, pair_config)
 
             if risk_params is None:
                 log.warning(f"Risk calculation gagal untuk {pair}, skip.")

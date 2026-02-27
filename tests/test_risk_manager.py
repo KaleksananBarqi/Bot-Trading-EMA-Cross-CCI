@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from src.config.settings import BotConfig, StrategyConfig, RiskConfig
+from src.config.settings import BotConfig, StrategyConfig, RiskConfig, PairConfig
 from src.strategy.ema_cci_strategy import SignalType, TradeSignal
 from src.risk.risk_manager import RiskManager, RiskParams
 
@@ -218,6 +218,59 @@ class TestPositionSizing:
 
         assert result is not None
         assert result.position_size == 0
+
+    def test_fixed_margin_size(self, config_swing: BotConfig,
+                               sample_df: pd.DataFrame) -> None:
+        """Position size untuk fixed_margin harus pakai nilai margin tetap."""
+        pair_cfg = PairConfig(
+            symbol="BTC/USDT",
+            leverage=20,
+            risk_mode="fixed_margin",
+            fixed_margin_usdt=50.0
+        )
+        rm = RiskManager(config_swing)
+        signal = make_buy_signal(entry_price=108.0)  # Untuk kemudahan hitungan entry = 100
+        result = rm.calculate(signal, sample_df, balance=10000, pair_config=pair_cfg)
+
+        assert result is not None
+        # Margin 50 * lev 20 = 1000 posisi value. Size = 1000 / 108 = 9.25925926
+        expected_size = round(1000.0 / 108.0, 8)
+        assert result.position_size == expected_size
+
+    def test_pct_balance_size(self, config_swing: BotConfig,
+                              sample_df: pd.DataFrame) -> None:
+        """Position size untuk pct_balance harus pakai % khusus pair."""
+        pair_cfg = PairConfig(
+            symbol="BTC/USDT",
+            leverage=10,
+            risk_mode="pct_balance",
+            risk_pct_balance=10.0  # Sengaja 10% vs global 5%
+        )
+        rm = RiskManager(config_swing)
+        signal = make_buy_signal(entry_price=108.0)
+        
+        # Result global
+        result_global = rm.calculate(signal, sample_df, balance=1000, pair_config=None)
+        # Result kustom (10%)
+        result_custom = rm.calculate(signal, sample_df, balance=1000, pair_config=pair_cfg)
+
+        assert result_global is not None
+        assert result_custom is not None
+        assert result_custom.position_size == result_global.position_size * 2
+
+    def test_risk_mode_fallback(self, config_swing: BotConfig,
+                                sample_df: pd.DataFrame) -> None:
+        """Pair dengan risk_mode=None harus fallback ke % global."""
+        pair_cfg = PairConfig(symbol="BTC/USDT", risk_mode=None)
+        rm = RiskManager(config_swing)
+        signal = make_buy_signal(entry_price=108.0)
+
+        result_global = rm.calculate(signal, sample_df, balance=1000)
+        result_fallback = rm.calculate(signal, sample_df, balance=1000, pair_config=pair_cfg)
+
+        assert result_global is not None
+        assert result_fallback is not None
+        assert result_global.position_size == result_fallback.position_size
 
 
 # ──────────────────────────────────────────────

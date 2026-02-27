@@ -92,9 +92,15 @@ class CandleManager:
         """
         key = (pair, timeframe)
 
+        # ── DEDUP: Skip jika candle dengan timestamp ini sudah ada ──
+        ts = pd.to_datetime(candle["timestamp"], unit="ms")
+        if key in self.buffer and ts in self.buffer[key].index:
+            log.debug(f"Candle duplikat diabaikan — {pair} [{timeframe}] ts={ts}")
+            return
+
         # Buat row baru
         new_row = pd.DataFrame([{
-            "timestamp": pd.to_datetime(candle["timestamp"], unit="ms"),
+            "timestamp": ts,
             "open": float(candle["open"]),
             "high": float(candle["high"]),
             "low": float(candle["low"]),

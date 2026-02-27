@@ -14,7 +14,7 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
-from src.config.settings import BotConfig
+from src.config.settings import BotConfig, PairConfig
 from src.strategy.ema_cci_strategy import SignalType, TradeSignal
 from src.utils.logger import log
 
@@ -41,7 +41,7 @@ class RiskManager:
         self.config = config
 
     def calculate(self, signal: TradeSignal, df: pd.DataFrame,
-                  balance: float) -> RiskParams | None:
+                  balance: float, pair_config: PairConfig | None = None) -> RiskParams | None:
         """
         Hitung parameter risiko untuk sinyal trading.
 
@@ -49,6 +49,7 @@ class RiskManager:
             signal: Sinyal trading (BUY/SELL).
             df: DataFrame OHLCV + indikator.
             balance: Saldo akun saat ini (dalam USDT).
+            pair_config: Konfigurasi pair spesifik opsional.
 
         Returns:
             RiskParams jika perhitungan berhasil, None jika gagal.
@@ -84,9 +85,23 @@ class RiskManager:
             else:  # SELL
                 tp = entry_price - (risk_distance * rr_ratio)
 
-            # Hitung Position Size
-            max_risk_amount = balance * (self.config.risk.max_position_size_pct / 100)
-            position_size = max_risk_amount / risk_distance
+            # Hitung Position Size berdasarkan mode
+            mode = pair_config.risk_mode if pair_config else None
+
+            if mode == "fixed_margin":
+                margin = pair_config.fixed_margin_usdt
+                leverage = pair_config.leverage
+                # Nilai posisi = margin * leverage
+                position_value = margin * leverage
+                position_size = position_value / entry_price
+            elif mode == "pct_balance":
+                risk_pct_cfg = pair_config.risk_pct_balance
+                max_risk_amount = balance * (risk_pct_cfg / 100)
+                position_size = max_risk_amount / risk_distance
+            else:
+                # Fallback ke max_position_size_pct global
+                max_risk_amount = balance * (self.config.risk.max_position_size_pct / 100)
+                position_size = max_risk_amount / risk_distance
 
             risk_pct = (risk_distance / entry_price) * 100
 

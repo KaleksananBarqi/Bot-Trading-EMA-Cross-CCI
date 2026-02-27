@@ -8,6 +8,7 @@ import asyncio
 from typing import TYPE_CHECKING
 
 import ccxt.pro as ccxtpro
+import pandas as pd
 
 from src.config.settings import BotConfig
 from src.utils.logger import log
@@ -138,6 +139,12 @@ class WebSocketFeed:
                 for candle_data in ohlcv_list:
                     # candle_data = [timestamp, open, high, low, close, volume]
                     timestamp, open_p, high, low, close, volume = candle_data
+
+                    # ── DEDUP: Skip candle yang lebih tua/sama dari buffer terakhir ──
+                    ts = pd.to_datetime(timestamp, unit="ms")
+                    buf = self.candle_manager.get_dataframe(pair, timeframe)
+                    if buf is not None and not buf.empty and ts <= buf.index[-1]:
+                        continue
 
                     # ccxt.pro watchOHLCV memberikan candle yang sudah closed
                     # saat ada candle baru masuk (candle sebelumnya otomatis closed)

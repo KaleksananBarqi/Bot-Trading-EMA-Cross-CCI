@@ -30,17 +30,24 @@ risk:
   sl_mode: "swing_low"          # "swing_low" = swing point, "ema_slow" = di bawah/atas EMA slow
   sl_buffer_pct: 0.05           # Buffer tambahan SL dalam persen (0.05 = 0.05%)
   max_position_size_pct: 5.0    # Maks % balance per posisi
-
+# fixed_margin = margin tetap
+# pct_balance = % balance
+# fallback = fallback ke max_position_size_pct global
 pairs:
   - symbol: "BTC/USDT"
     leverage: 20
     margin_mode: "isolated"
+    risk_mode: "fixed_margin"
+    fixed_margin_usdt: 50.0       # Margin tetap 50 USDT
   - symbol: "ETH/USDT"
     leverage: 10
     margin_mode: "isolated"
+    risk_mode: "pct_balance"
+    risk_pct_balance: 3.0         # Gunakan 3% dari total balance
   - symbol: "SOL/USDT"
     leverage: 10
     margin_mode: "isolated"
+    # Tanpa risk_mode -> fallback ke risk.max_position_size_pct (5.0%) global
 
 telegram:
   enabled: true

@@ -29,6 +29,27 @@ class PairConfig(BaseModel):
     symbol: str = Field(..., description="Simbol pair, misal BTC/USDT")
     leverage: int = Field(default=10, ge=1, le=125, description="Leverage untuk pair ini")
     margin_mode: Literal["isolated", "crossed"] = Field(default="isolated", description="Mode margin")
+    risk_mode: Literal["fixed_margin", "pct_balance"] | None = Field(
+        default=None,
+        description="Mode risk spesifik per pair. Jika None, fallback ke risk global"
+    )
+    fixed_margin_usdt: float | None = Field(
+        default=None, ge=0,
+        description="Margin tetap dalam USDT (untuk mode fixed_margin)"
+    )
+    risk_pct_balance: float | None = Field(
+        default=None, gt=0, le=100,
+        description="Persen balance akun per trade (untuk mode pct_balance)"
+    )
+
+    @model_validator(mode="after")
+    def validate_risk_mode(self) -> "PairConfig":
+        """Pastikan parameter risk mode sesuai dengan modenya."""
+        if self.risk_mode == "fixed_margin" and self.fixed_margin_usdt is None:
+            raise ValueError(f"risk_mode='fixed_margin' butuh fixed_margin_usdt pada {self.symbol}")
+        if self.risk_mode == "pct_balance" and self.risk_pct_balance is None:
+            raise ValueError(f"risk_mode='pct_balance' butuh risk_pct_balance pada {self.symbol}")
+        return self
 
 
 class StrategyConfig(BaseModel):
