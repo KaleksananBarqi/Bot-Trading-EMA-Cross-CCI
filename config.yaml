@@ -47,6 +47,41 @@ pairs:
   - symbol: "SOL/USDT"
     leverage: 10
     margin_mode: "isolated"
+  - symbol: "ADA/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "fixed_margin"
+    fixed_margin_usdt: 20.0       # Margin tetap 20 USDT
+  - symbol: "XRP/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "pct_balance"
+    risk_pct_balance: 2.0         # Gunakan 2% dari total balance
+  - symbol: "DOT/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "fixed_margin"
+    fixed_margin_usdt: 15.0       # Margin tetap 15 USDT
+  - symbol: "LINK/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "pct_balance"
+    risk_pct_balance: 1.0         # Gunakan 1.0% dari total balance
+  - symbol: "UNI/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "fixed_margin"
+    fixed_margin_usdt: 10.0       # Margin tetap 10 USDT
+  - symbol: "XPL/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "pct_balance"
+    risk_pct_balance: 1.0         # Gunakan 1.0% dari total balance
+  - symbol: "DOGE/USDT"
+    leverage: 10
+    margin_mode: "isolated"
+    risk_mode: "fixed_margin"
+    fixed_margin_usdt: 5.0       # Margin tetap 5 USDT
     # Tanpa risk_mode -> fallback ke risk.max_position_size_pct (5.0%) global
 
 telegram:
