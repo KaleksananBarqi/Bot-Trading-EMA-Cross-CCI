@@ -2,10 +2,14 @@
 # Konfigurasi Bot Trading EMA Cross + CCI
 # ============================================================
 
+# ============================================================
+# Mode Bot
+# ============================================================
+demo_mode: true               # true = Simulasi / Paper Trading, false = Real Trade
+
 exchange:
   name: binance
   market_type: future           # USDⓈ-M Futures
-  testnet: true                 # true = testnet, false = production
 
 strategy:
   ema_fast: 10                  # EMA 1 (Fast Momentum) length

@@ -111,6 +111,7 @@ class LoggingConfig(BaseModel):
 
 class BotConfig(BaseModel):
     """Konfigurasi utama bot — menggabungkan semua sub-konfigurasi."""
+    demo_mode: bool = True
     exchange: ExchangeConfig = ExchangeConfig()
     strategy: StrategyConfig = StrategyConfig()
     risk: RiskConfig = RiskConfig()
@@ -167,9 +168,19 @@ def load_config(config_path: str = "config.yaml", env_path: str = ".env") -> Bot
 
     log.info(f"Loaded config.yaml dari: {cfg_file.resolve()}")
 
-    # Inject secrets dari environment variables
-    raw_config["binance_api_key"] = os.getenv("BINANCE_API_KEY", "")
-    raw_config["binance_api_secret"] = os.getenv("BINANCE_API_SECRET", "")
+    # Menyinkronkan nilai testnet bawaan exchange dengan mode demo global
+    is_demo = raw_config.get("demo_mode", True)
+    if "exchange" not in raw_config:
+        raw_config["exchange"] = {}
+    raw_config["exchange"]["testnet"] = is_demo
+
+    # Inject secrets dari environment variables berdasarkan mode demo
+    if is_demo:
+        raw_config["binance_api_key"] = os.getenv("BINANCE_TESTNET_KEY", "")
+        raw_config["binance_api_secret"] = os.getenv("BINANCE_TESTNET_SECRET", "")
+    else:
+        raw_config["binance_api_key"] = os.getenv("BINANCE_API_KEY", "")
+        raw_config["binance_api_secret"] = os.getenv("BINANCE_API_SECRET", "")
     raw_config["telegram_bot_token"] = os.getenv("TELEGRAM_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN", "")
     raw_config["telegram_chat_id"] = os.getenv("TELEGRAM_CHAT_ID", "")
     raw_config["telegram_message_thread_id"] = os.getenv("TELEGRAM_MESSAGE_THREAD_ID")
