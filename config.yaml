@@ -1,0 +1,51 @@
+# ============================================================
+# Konfigurasi Bot Trading EMA Cross + CCI
+# ============================================================
+
+exchange:
+  name: binance
+  market_type: future           # USDⓈ-M Futures
+  testnet: true                 # true = testnet, false = production
+
+strategy:
+  ema_fast: 10                  # EMA 1 (Fast Momentum) length
+  ema_slow: 20                  # EMA 2 (Trend) length
+  cci_length: 20                # CCI (Momentum Filter) length
+  valid_timeframes:             # Whitelist TF (1m DILARANG)
+    - "15m"
+    - "1h"
+    - "4h"
+  active_timeframes:            # TF yang AKTIF dieksekusi
+    - "15m"
+  entry_mode: "close"           # "close" = masuk di candle close, "pullback" = tunggu retrace ke EMA fast
+  swing_lookback: 10            # Jumlah candle untuk deteksi swing high/low
+  pullback_ttl_candles: 3       # (pullback mode) Batal jika tidak terisi dalam N candle
+
+risk:
+  risk_reward_ratio: 2.0        # Rasio Risk:Reward (1:2)
+  sl_mode: "swing_low"          # "swing_low" = swing point, "ema_slow" = di bawah/atas EMA slow
+  sl_buffer_pct: 0.05           # Buffer tambahan SL dalam persen (0.05 = 0.05%)
+  max_position_size_pct: 5.0    # Maks % balance per posisi
+
+pairs:
+  - "BTC/USDT"
+  - "ETH/USDT"
+  - "SOL/USDT"
+
+telegram:
+  enabled: true
+  notify_signals: true          # Kirim notif saat sinyal muncul
+  notify_fills: true            # Kirim notif saat order terisi
+  notify_sl_tp: true            # Kirim notif saat SL/TP hit
+  notify_errors: true           # Kirim notif saat error/disconnect
+
+mongodb:
+  database: "ema_cci_bot"
+  collection_trades: "trades"
+  collection_signals: "signals"
+
+logging:
+  level: "INFO"                 # DEBUG, INFO, WARNING, ERROR
+  file: "logs/bot.log"          # Path file log
+  rotation: "10 MB"             # Rotasi per ukuran file
+  retention: "7 days"           # Simpan log selama 7 hari

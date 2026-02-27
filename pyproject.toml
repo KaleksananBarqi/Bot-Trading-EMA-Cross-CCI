@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ema-cci-bot"
+version = "1.0.0"
+description = "Bot Trading Crypto Futures - Strategi EMA Cross + CCI dengan Binance WebSocket"
+requires-python = ">=3.11"
+dependencies = [
+    "ccxt>=4.0",
+    "pandas>=2.0",
+    "pandas-ta>=0.4.19b0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "loguru>=0.7",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-telegram-bot>=21.0",
+    "motor>=3.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.scripts]
+ema-cci-bot = "src.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

@@ -1,0 +1,83 @@
+﻿Obtaining file:///C:/Projek/BOT%20EMA%20CROSS%2BCCI
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: ccxt>=4.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (4.5.40)
+Requirement already satisfied: pandas>=2.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (3.0.1)
+Requirement already satisfied: numpy>=1.26 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (2.4.2)
+Requirement already satisfied: pyyaml>=6.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (6.0.3)
+Requirement already satisfied: python-dotenv>=1.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (1.2.1)
+Requirement already satisfied: loguru>=0.7 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (0.7.3)
+Requirement already satisfied: pydantic>=2.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (2.12.5)
+Requirement already satisfied: pydantic-settings>=2.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (2.13.1)
+Requirement already satisfied: python-telegram-bot>=21.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (22.6)
+Requirement already satisfied: motor>=3.3 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (3.7.1)
+Requirement already satisfied: pytest>=7.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (9.0.2)
+Requirement already satisfied: pytest-asyncio>=0.21 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ema-cci-bot==1.0.0) (1.3.0)
+Requirement already satisfied: setuptools>=60.9.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (82.0.0)
+Requirement already satisfied: certifi>=2018.1.18 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (2026.2.25)
+Requirement already satisfied: requests>=2.18.4 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (2.32.5)
+Requirement already satisfied: cryptography>=2.6.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (46.0.5)
+Requirement already satisfied: typing_extensions>=4.4.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (4.15.0)
+Requirement already satisfied: aiohttp>=3.10.11 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (3.13.3)
+Requirement already satisfied: aiodns>=1.1.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (4.0.0)
+Requirement already satisfied: yarl>=1.7.2 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (1.22.0)
+Requirement already satisfied: coincurve==21.0.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from ccxt>=4.0->ema-cci-bot==1.0.0) (21.0.0)
+Requirement already satisfied: pycares<6,>=5.0.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiodns>=1.1.1->ccxt>=4.0->ema-cci-bot==1.0.0) (5.0.1)
+Requirement already satisfied: cffi>=1.5.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pycares<6,>=5.0.0->aiodns>=1.1.1->ccxt>=4.0->ema-cci-bot==1.0.0) (2.0.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (25.4.0)
+Requirement already satisfied: frozenlist>=1.1.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from aiohttp>=3.10.11->ccxt>=4.0->ema-cci-bot==1.0.0) (0.4.1)
+Requirement already satisfied: idna>=2.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from yarl>=1.7.2->ccxt>=4.0->ema-cci-bot==1.0.0) (3.11)
+Requirement already satisfied: pycparser in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from cffi>=1.5.0->pycares<6,>=5.0.0->aiodns>=1.1.1->ccxt>=4.0->ema-cci-bot==1.0.0) (3.0)
+Requirement already satisfied: colorama>=0.3.4 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from loguru>=0.7->ema-cci-bot==1.0.0) (0.4.6)
+Requirement already satisfied: win32-setctime>=1.0.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from loguru>=0.7->ema-cci-bot==1.0.0) (1.2.0)
+Requirement already satisfied: pymongo<5.0,>=4.9 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from motor>=3.3->ema-cci-bot==1.0.0) (4.16.0)
+Requirement already satisfied: dnspython<3.0.0,>=2.6.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pymongo<5.0,>=4.9->motor>=3.3->ema-cci-bot==1.0.0) (2.8.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pandas>=2.0->ema-cci-bot==1.0.0) (2.9.0.post0)
+Requirement already satisfied: tzdata in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pandas>=2.0->ema-cci-bot==1.0.0) (2025.3)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pydantic>=2.0->ema-cci-bot==1.0.0) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pydantic>=2.0->ema-cci-bot==1.0.0) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pydantic>=2.0->ema-cci-bot==1.0.0) (0.4.2)
+Requirement already satisfied: iniconfig>=1.0.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pytest>=7.0->ema-cci-bot==1.0.0) (2.3.0)
+Requirement already satisfied: packaging>=22 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pytest>=7.0->ema-cci-bot==1.0.0) (26.0)
+Requirement already satisfied: pluggy<2,>=1.5 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pytest>=7.0->ema-cci-bot==1.0.0) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from pytest>=7.0->ema-cci-bot==1.0.0) (2.19.2)
+Requirement already satisfied: six>=1.5 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from python-dateutil>=2.8.2->pandas>=2.0->ema-cci-bot==1.0.0) (1.17.0)
+Requirement already satisfied: httpx<0.29,>=0.27 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from python-telegram-bot>=21.0->ema-cci-bot==1.0.0) (0.28.1)
+Requirement already satisfied: anyio in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from httpx<0.29,>=0.27->python-telegram-bot>=21.0->ema-cci-bot==1.0.0) (4.12.1)
+Requirement already satisfied: httpcore==1.* in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from httpx<0.29,>=0.27->python-telegram-bot>=21.0->ema-cci-bot==1.0.0) (1.0.9)
+Requirement already satisfied: h11>=0.16 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from httpcore==1.*->httpx<0.29,>=0.27->python-telegram-bot>=21.0->ema-cci-bot==1.0.0) (0.16.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from requests>=2.18.4->ccxt>=4.0->ema-cci-bot==1.0.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\projek\bot ema cross+cci\.venv\lib\site-packages (from requests>=2.18.4->ccxt>=4.0->ema-cci-bot==1.0.0) (2.6.3)
+Building wheels for collected packages: ema-cci-bot
+  Building editable for ema-cci-bot (pyproject.toml): started
+  Building editable for ema-cci-bot (pyproject.toml): finished with status 'done'
+  Created wheel for ema-cci-bot: filename=ema_cci_bot-1.0.0-0.editable-py3-none-any.whl size=3176 sha256=617ea9b2865e20e7b6f65b39ad11f8e9ba8cc85d69164524019b8528736ca3a1
+  Stored in directory: C:\Users\Admin\AppData\Local\Temp\pip-ephem-wheel-cache-13399fyu\wheels\29\b2\e7\50cc2c47126147ad149c2e656af4fdf638ca6a9247dda1f427
+Successfully built ema-cci-bot
+Installing collected packages: ema-cci-bot
+  Attempting uninstall: ema-cci-bot
+    Found existing installation: ema-cci-bot 1.0.0
+    Uninstalling ema-cci-bot-1.0.0:
+      Successfully uninstalled ema-cci-bot-1.0.0
+Successfully installed ema-cci-bot-1.0.0
+.venv\Scripts\pip : 
+At line:1 char:1
++ .venv\Scripts\pip install -e ".[dev]" > pip_install.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteExce 
+   ption
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[notice] A new release of pip is available: 25.3 -> 26.0.1
+[notice] To update, run: C:\Projek\BOT EMA 
+CROSS+CCI\.venv\Scripts\python.exe -m pip install --upgrade pip
