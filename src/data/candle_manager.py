@@ -116,7 +116,7 @@ class CandleManager:
         df = self._compute_indicators(df)
         self.buffer[key] = df
 
-        log.info(
+        log.debug(
             f"Candle close — {pair} [{timeframe}] "
             f"O={candle['open']} H={candle['high']} "
             f"L={candle['low']} C={candle['close']}"

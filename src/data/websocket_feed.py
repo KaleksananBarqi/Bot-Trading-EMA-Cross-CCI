@@ -50,10 +50,10 @@ class WebSocketFeed:
             },
         }
 
-        if self.config.exchange.testnet:
-            exchange_params["sandbox"] = True
-
         self.exchange = exchange_class(exchange_params)
+
+        if self.config.exchange.testnet:
+            self.exchange.enable_demo_trading(True)
 
         log.info(
             f"Exchange diinisialisasi — {self.config.exchange.name} "

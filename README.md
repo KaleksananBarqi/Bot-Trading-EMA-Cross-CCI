@@ -57,7 +57,7 @@ Ditentukan pada `config.yaml` > `strategy.entry_mode`:
 ## Persiapan & Instalasi
 
 ### 1. Requirements Eksternal
-* Python 3.11 atau lebih baru
+* Python 3.10 atau lebih baru
 * MongoDB Server (berjalan lokal atau Atlas)
 
 ### 2. Instalasi Environment

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "ema-cci-bot"
 version = "1.0.0"
 description = "Bot Trading Crypto Futures - Strategi EMA Cross + CCI dengan Binance WebSocket"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "ccxt>=4.0",
     "pandas>=2.0",
