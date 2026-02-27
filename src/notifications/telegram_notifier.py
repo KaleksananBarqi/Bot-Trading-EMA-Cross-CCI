@@ -37,6 +37,7 @@ class TelegramNotifier:
     def __init__(self, config: BotConfig) -> None:
         self.config = config
         self.chat_id = config.telegram_chat_id
+        self.thread_id = config.telegram_message_thread_id
         self.bot: Bot | None = None
 
     async def initialize(self) -> None:
@@ -69,6 +70,7 @@ class TelegramNotifier:
         try:
             await self.bot.send_message(
                 chat_id=self.chat_id,
+                message_thread_id=self.thread_id,
                 text=message,
                 parse_mode=ParseMode.HTML,
             )

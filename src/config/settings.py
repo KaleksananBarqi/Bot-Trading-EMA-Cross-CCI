@@ -124,6 +124,7 @@ class BotConfig(BaseModel):
     binance_api_secret: str = ""
     telegram_bot_token: str = ""
     telegram_chat_id: str = ""
+    telegram_message_thread_id: str | None = None
     mongo_uri: str = "mongodb://localhost:27017"
 
 
@@ -169,8 +170,9 @@ def load_config(config_path: str = "config.yaml", env_path: str = ".env") -> Bot
     # Inject secrets dari environment variables
     raw_config["binance_api_key"] = os.getenv("BINANCE_API_KEY", "")
     raw_config["binance_api_secret"] = os.getenv("BINANCE_API_SECRET", "")
-    raw_config["telegram_bot_token"] = os.getenv("TELEGRAM_BOT_TOKEN", "")
+    raw_config["telegram_bot_token"] = os.getenv("TELEGRAM_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN", "")
     raw_config["telegram_chat_id"] = os.getenv("TELEGRAM_CHAT_ID", "")
+    raw_config["telegram_message_thread_id"] = os.getenv("TELEGRAM_MESSAGE_THREAD_ID")
     raw_config["mongo_uri"] = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 
     if "mongodb" not in raw_config:
